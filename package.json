@@ -1,0 +1,21 @@
+{
+  "name": "academy-api",
+  "version": "0.1.0",
+  "description": "Backend for Academy App",
+  "main": "handler.js",
+  "scripts": {
+    "test": "serverless-bundle test"
+  },
+  "repository": "https://github.com/BenjaminSymons/literate-dollop.git",
+  "author": "BenjaminSymons",
+  "license": "MIT",
+  "devDependencies": {
+    "aws-sdk": "^2.948.0",
+    "serverless-bundle": "^4.4.0",
+    "serverless-dotenv-plugin": "^3.9.0",
+    "serverless-offline": "^7.0.0"
+  },
+  "dependencies": {
+    "uuid": "^7.0.3"
+  }
+}
