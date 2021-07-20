@@ -39,14 +39,26 @@ provider:
 
 functions:
   create:
-    handler: course.course_create
+    handler: course.create
     events:
       - http:
           path: courses
           method: post
   get:
-    handler: course.course_get
+    handler: course.get
     events:
       - http:
           path: courses/{id}
           method: get
+  update:
+    handler: course.update
+    events:
+      - http:
+          path: courses/{id}
+          method: put
+  delete:
+    handler: course.remove
+    events:
+      - http:
+          path: courses/{id}
+          method: delete

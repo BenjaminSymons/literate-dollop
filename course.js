@@ -2,7 +2,7 @@ import * as uuid from 'uuid'
 import handler from './libs/handler-lib'
 import dynamoDb from './libs/dynamodb-lib'
 
-export const course_create = handler(async (event, context) => {
+export const create = handler(async (event, context) => {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body)
 
@@ -26,7 +26,7 @@ export const course_create = handler(async (event, context) => {
   return params.Item
 })
 
-export const course_get = handler(async (event, context) => {
+export const get = handler(async (event, context) => {
   const params = {
     TableName: process.env.tableName,
     Key: {
@@ -41,4 +41,43 @@ export const course_get = handler(async (event, context) => {
   }
 
   return result.Item
+})
+
+export const update = handler(async (event, callback) => {
+  const data = JSON.parse(event.body)
+
+  const params = {
+    TableName: process.env.tableName,
+    Key: {
+      PK: event.pathParameters.id,
+      SK: event.pathParameters.id,
+    },
+    UpdateExpression:
+      'SET title = :title, description = :description, code = :code',
+    ExpressionAttributeValues: {
+      ':title': data.title || null,
+      ':description': data.description || null,
+      ':code': data.code || null,
+    },
+
+    ReturnValues: 'ALL_NEW',
+  }
+
+  await dynamoDb.update(params)
+
+  return { status: true }
+})
+
+export const remove = handler(async (event, callback) => {
+  const params = {
+    TableName: process.env.tableName,
+    Key: {
+      PK: event.pathParameters.id,
+      SK: event.pathParameters.id,
+    },
+  }
+
+  await dynamoDb.delete(params)
+
+  return { status: true }
 })
