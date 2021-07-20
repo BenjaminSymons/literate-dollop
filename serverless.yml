@@ -25,17 +25,23 @@ provider:
   environment:
     tableName: OnlineAcademy
 
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Scan
-        - dynamodb:Query
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-        - dynamodb:DescribeTable
-      Resource: 'arn:aws:dynamodb:us-east-1:*:*'
+  # added as recommended by serverless
+  lambdaHashingVersion: 20201221
+
+  # deprecated warning moving to 3.0 format
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Scan
+            - dynamodb:Query
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:DescribeTable
+          Resource: 'arn:aws:dynamodb:us-east-1:*:*'
 
 functions:
   create:
