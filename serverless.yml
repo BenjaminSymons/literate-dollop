@@ -1,5 +1,5 @@
 # NOTE: update this with your service name
-service: acadamy-api
+service: academy-api
 
 # Create an optimized package for our functions 
 package:
@@ -22,11 +22,26 @@ provider:
   #
   #environment:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+  environment:
+    tableName: OnlineAcademy
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
 
 functions:
-  hello:
-    handler: handler.hello
+  create:
+    handler: course.create
     events:
       - http:
-          path: hello
-          method: get
+          path: courses
+          method: post

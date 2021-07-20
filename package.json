@@ -4,6 +4,9 @@
   "description": "Backend for Academy App",
   "main": "handler.js",
   "scripts": {
+    "lint": "eslint **/*.js --ignore-pattern node_modules/",
+    "format:check": "prettier --check **/*.js",
+    "format:fix": "prettier --write **/*.js",
     "test": "serverless-bundle test"
   },
   "repository": "https://github.com/BenjaminSymons/literate-dollop.git",
@@ -11,6 +14,8 @@
   "license": "MIT",
   "devDependencies": {
     "aws-sdk": "^2.948.0",
+    "eslint": "^7.31.0",
+    "prettier": "^2.3.2",
     "serverless-bundle": "^4.4.0",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^7.0.0"
