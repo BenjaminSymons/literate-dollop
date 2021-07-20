@@ -1,7 +1,7 @@
 # NOTE: update this with your service name
 service: academy-api
 
-# Create an optimized package for our functions 
+# Create an optimized package for our functions
 package:
   individually: true
 
@@ -35,13 +35,18 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
         - dynamodb:DescribeTable
-      Resource: "arn:aws:dynamodb:us-east-1:*:*"
-
+      Resource: 'arn:aws:dynamodb:us-east-1:*:*'
 
 functions:
   create:
-    handler: course.create
+    handler: course.course_create
     events:
       - http:
           path: courses
           method: post
+  get:
+    handler: course.course_get
+    events:
+      - http:
+          path: courses/{id}
+          method: get

@@ -2,7 +2,7 @@ import * as uuid from 'uuid'
 import handler from './libs/handler-lib'
 import dynamoDb from './libs/dynamodb-lib'
 
-export const create = handler(async (event, context) => {
+export const course_create = handler(async (event, context) => {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body)
 
@@ -24,4 +24,21 @@ export const create = handler(async (event, context) => {
   await dynamoDb.put(params)
 
   return params.Item
+})
+
+export const course_get = handler(async (event, context) => {
+  const params = {
+    TableName: process.env.tableName,
+    Key: {
+      PK: event.pathParameters.id,
+      SK: event.pathParameters.id,
+    },
+  }
+
+  const result = await dynamoDb.get(params)
+  if (!result.Item) {
+    throw new Error('Item not found.')
+  }
+
+  return result.Item
 })
