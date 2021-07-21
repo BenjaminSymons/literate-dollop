@@ -12,7 +12,7 @@ export const create = handler(async (event, context) => {
     TableName: process.env.tableName,
     Item: {
       // The attributes of the item to be created
-      PK: courseID,
+      PK: 'COURSE',
       SK: courseID,
       entityType: 'course',
       courseCode: data.courseCode,
@@ -49,15 +49,15 @@ export const update = handler(async (event, callback) => {
   const params = {
     TableName: process.env.tableName,
     Key: {
-      PK: event.pathParameters.id,
+      PK: 'COURSE',
       SK: event.pathParameters.id,
     },
     UpdateExpression:
-      'SET title = :title, description = :description, code = :code',
+      'SET title = :title, description = :description, courseCode = :courseCode',
     ExpressionAttributeValues: {
       ':title': data.title || null,
       ':description': data.description || null,
-      ':code': data.code || null,
+      ':courseCode': data.courseCode || null,
     },
 
     ReturnValues: 'ALL_NEW',
@@ -66,6 +66,20 @@ export const update = handler(async (event, callback) => {
   await dynamoDb.update(params)
 
   return { status: true }
+})
+
+export const list = handler(async (event, callback) => {
+  const params = {
+    TableName: process.env.tableName,
+    KeyConditionExpression: 'PK = :PK',
+    ExpressionAttributeValues: {
+      ':PK': 'COURSE',
+    },
+  }
+
+  const result = await dynamoDb.query(params)
+
+  return result.Items
 })
 
 export const remove = handler(async (event, callback) => {

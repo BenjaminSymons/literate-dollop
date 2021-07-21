@@ -62,6 +62,12 @@ functions:
       - http:
           path: courses/{id}
           method: put
+  list:
+    handler: course.list
+    events:
+      - http:
+          path: courses
+          method: get
   delete:
     handler: course.remove
     events:

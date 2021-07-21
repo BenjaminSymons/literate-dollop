@@ -1,6 +1,6 @@
 {
-  "body": "{\"title\":\"The First and only course\", \"description\":\"This is where we put the description.\", \"code\":\"fc101\"}",
+  "body": "{\"title\":\"The First and only course\", \"description\":\"This is where we put the description.\", \"courseCode\":\"fc101\"}",
   "pathParameters": {
-    "id": "COURSE#39e24534-056e-427f-9956-06f9ca2c6085"
+    "id": "COURSE#174b48f5-470e-49b9-abed-1c192ce1b025"
   }
 }

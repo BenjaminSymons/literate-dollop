@@ -7,7 +7,11 @@
     "lint": "eslint **/*.js --ignore-pattern node_modules/",
     "format:check": "prettier --check **/*.js",
     "format:fix": "prettier --write **/*.js",
-    "test": "serverless-bundle test"
+    "test": "serverless-bundle test",
+    "mock:create": "serverless invoke local --function create --path mocks/create-course-event.json",
+    "mock:get": "serverless invoke local --function get --path mocks/get-course-event.json",
+    "mock:update": "serverless invoke local --function update --path mocks/update-course-event.json",
+    "mock:list": "serverless invoke local --function list --path mocks/list-course-event.json"
   },
   "repository": "https://github.com/BenjaminSymons/literate-dollop.git",
   "author": "BenjaminSymons",
