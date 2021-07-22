@@ -54,6 +54,7 @@ functions:
       - http:
           path: courses
           method: post
+          cors: true
           authorizer: aws_iam
 
   get:
@@ -66,6 +67,7 @@ functions:
       - http:
           path: courses/{id}
           method: get
+          cors: true
           authorizer: aws_iam
 
   update:
@@ -78,6 +80,7 @@ functions:
       - http:
           path: courses/{id}
           method: put
+          cors: true
           authorizer: aws_iam
 
   list:
@@ -90,6 +93,7 @@ functions:
       - http:
           path: courses
           method: get
+          cors: true
           authorizer: aws_iam
 
   delete:
@@ -102,4 +106,9 @@ functions:
       - http:
           path: courses/{id}
           method: delete
+          cors: true
           authorizer: aws_iam
+
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
