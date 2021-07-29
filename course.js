@@ -38,7 +38,7 @@ export const get = handler(async (event, context) => {
   const params = {
     TableName: process.env.tableName,
     Key: {
-      PK: event.pathParameters.id,
+      PK: 'COURSE',
       SK: event.pathParameters.id,
     },
   }
