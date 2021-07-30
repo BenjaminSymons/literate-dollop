@@ -14,17 +14,19 @@ export const create = handler(async (event, context) => {
     console.log('No user in use')
   }
 
-  const courseID = 'COURSE#' + uuid.v4()
+  const courseID = uuid.v4()
 
   const params = {
     TableName: process.env.tableName,
     Item: {
       // The attributes of the item to be created
       PK: 'COURSE',
-      SK: courseID,
+      SK: `COURSE#${courseID}`,
+      ID: courseID,
       entityType: 'course',
       courseCode: data.courseCode,
       title: data.title,
+      description: data.description,
       createdAt: Date.now(), // Current Unix timestamp
     },
   }
@@ -39,7 +41,7 @@ export const get = handler(async (event, context) => {
     TableName: process.env.tableName,
     Key: {
       PK: 'COURSE',
-      SK: event.pathParameters.id,
+      SK: `COURSE#${event.pathParameters.id}`,
     },
   }
 
@@ -58,7 +60,7 @@ export const update = handler(async (event, callback) => {
     TableName: process.env.tableName,
     Key: {
       PK: 'COURSE',
-      SK: event.pathParameters.id,
+      SK: `COURSE#${event.pathParameters.id}`,
     },
     UpdateExpression:
       'SET title = :title, description = :description, courseCode = :courseCode',
@@ -95,7 +97,7 @@ export const remove = handler(async (event, callback) => {
     TableName: process.env.tableName,
     Key: {
       PK: event.pathParameters.id,
-      SK: event.pathParameters.id,
+      SK: `COURSE#${event.pathParameters.id}`,
     },
   }
 

@@ -1,4 +1,3 @@
-# NOTE: update this with your service name
 service: academy-api
 
 # Create an optimized package for our functions
@@ -41,6 +40,7 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
             - dynamodb:DescribeTable
+          # Resource: 'arn:aws:dynamodb:us-east-1:*:*:table/${self.provider.environment.tableName}'
           Resource: 'arn:aws:dynamodb:us-east-1:*:*'
 
 functions:
@@ -112,3 +112,4 @@ functions:
 resources:
   # API Gateway Errors
   - ${file(resources/api-gateway-errors.yml)}
+  # - ${file(resources/dynamodb-table.yml)}
